@@ -12,11 +12,11 @@ output "networkfirewall_firewall_policies_description" {
 }
 output "networkfirewall_firewall_policies_encryption_configuration" {
   description = "Map of encryption_configuration values across all networkfirewall_firewall_policies, keyed the same as var.networkfirewall_firewall_policies"
-  value       = { for k, v in aws_networkfirewall_firewall_policy.networkfirewall_firewall_policies : k => v.encryption_configuration if v.encryption_configuration != null && length(v.encryption_configuration) > 0 }
+  value       = { for k, v in aws_networkfirewall_firewall_policy.networkfirewall_firewall_policies : k => one(v.encryption_configuration) if v.encryption_configuration != null && length(v.encryption_configuration) > 0 }
 }
 output "networkfirewall_firewall_policies_firewall_policy" {
   description = "Map of firewall_policy values across all networkfirewall_firewall_policies, keyed the same as var.networkfirewall_firewall_policies"
-  value       = { for k, v in aws_networkfirewall_firewall_policy.networkfirewall_firewall_policies : k => v.firewall_policy if v.firewall_policy != null && length(v.firewall_policy) > 0 }
+  value       = { for k, v in aws_networkfirewall_firewall_policy.networkfirewall_firewall_policies : k => one(v.firewall_policy) if v.firewall_policy != null && length(v.firewall_policy) > 0 }
 }
 output "networkfirewall_firewall_policies_name" {
   description = "Map of name values across all networkfirewall_firewall_policies, keyed the same as var.networkfirewall_firewall_policies"
